@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require_relative "../environment.rb"
+require_relative "../lib/cli.rb"
+require_relative "../lib/api.rb"
+require_relative "../lib/conditions.rb"
+require_relative "../lib/spells.rb"
+require_relative "../lib/equipment.rb"
+
+CLI.new.start
