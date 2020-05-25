@@ -9,7 +9,5 @@ class Equipment
   end
 
   def get_all(url)
-    conditions = API.new(url).parse_json
-    conditions.each { |k| puts k }
   end
 end
