@@ -7,11 +7,16 @@ require_relative "../lib/condition.rb"
 require_relative "../lib/spell.rb"
 require_relative "../lib/equipment.rb"
 
+puts
+puts "𝕕𝕦𝕟𝕘𝕖𝕠𝕟𝕤 𝕒𝕟𝕕 𝕕𝕣𝕒𝕘𝕠𝕟𝕤 𝕔𝕠𝕞𝕡𝕒𝕟𝕚𝕠𝕟"
+puts
 CLI.new.start
 
 #Calling classes:
 #condition = Condition.new
 #condition.urls("http://www.dnd5eapi.co/api/conditions/")
 #condition.create_all("http://www.dnd5eapi.co/api/conditions/")
-#Spell.new.get_all("http://www.dnd5eapi.co/api/spells/")
-#Equipment.new("blah").get_all("http://www.dnd5eapi.co/api/equipment/")
+
+#spell = Spell.new
+#spell.urls("http://www.dnd5eapi.co/api/spells/")
+#spell.create_all("http://www.dnd5eapi.co/api/spells/")

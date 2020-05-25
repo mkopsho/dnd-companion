@@ -22,7 +22,7 @@ class Condition
     conditions = API.new(url).parse_json
     conditions_array = conditions["results"]
     conditions_array.each do |hash|
-      conditions_urls << url + hash["name"].downcase
+      conditions_urls << url + hash["index"].downcase
     end
     conditions_urls
   end
@@ -39,8 +39,8 @@ class Condition
       Condition.new(name, description)
     end
   end
-    
 
+# Do I need this anymore?  
 #  def self.get_all(url)
 #    condition_names = []
 #    conditions = API.new(url).parse_json
