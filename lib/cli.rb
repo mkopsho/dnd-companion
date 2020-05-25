@@ -12,11 +12,11 @@ class CLI
     user_input = gets.chomp.strip
     case user_input 
     when "1"
-      spells_menu
+      self.spells_menu
     when "2"
-      conditions_menu
+      self.conditions_menu
     when "3"
-      equipment_menu
+      self.equipment_menu
     when "4"
       puts "Farewell, traveler!".colorize(:light_blue)
     else
@@ -26,17 +26,20 @@ class CLI
   end
 
   def spells_menu
-    puts "A fine choice, traveler. Which spell would you like more info on?".colorize(:light_blue)
+    puts "A fine choice, traveler. Which spell would you like more information on?".colorize(:light_blue)
   end
 
   def conditions_menu
-    puts "A fine choice, traveler. Which condition would you like more info on?".colorize(:light_blue)
-    #conditions = Condition.get_all("http://www.dnd5eapi.co/api/conditions/")
-    #puts conditions
+    puts "A fine choice, traveler. Which condition would you like more information on?".colorize(:light_blue)
+    puts
+    conditions = Condition.get_all("http://www.dnd5eapi.co/api/conditions/")
+    conditions.each_with_index do |condition, index| 
+      print "#{index + 1}. #{condition} | ".colorize(:blue)
+    end
   end
 
   def equipment_menu
-    puts "A fine choice, traveler. Which condition would you like more info on?".colorize(:light_blue)
+    puts "A fine choice, traveler. Which equipment would you like more information on?".colorize(:light_blue)
   end
 
 end
