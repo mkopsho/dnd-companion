@@ -13,6 +13,7 @@ class CLI
       puts "Spells go here!"
     when "2"
       puts "Conditions go here!"
+      Condition.get_all("http://www.dnd5eapi.co/api/conditions/")
     when "3"
       puts "Equipment goes here!"
     when "4"

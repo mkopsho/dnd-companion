@@ -3,7 +3,7 @@ require "open-uri"
 require "json"
 require "pry"
 
-class GetData
+class API
   attr_accessor :url
 
   def initialize(url)
@@ -21,7 +21,7 @@ class GetData
   end
 end
 
-#conditions = GetData.new("http://www.dnd5eapi.co/api/conditions/")
-#spells = GetData.new("http://www.dnd5eapi.co/api/spells/")
-#equipment = GetData.new("http://www.dnd5eapi.co/api/equipment/")
+#conditions = API.new("http://www.dnd5eapi.co/api/conditions/")
+#spells = API.new("http://www.dnd5eapi.co/api/spells/")
+#equipment = API.new("http://www.dnd5eapi.co/api/equipment/")
 #binding.pry

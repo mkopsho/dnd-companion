@@ -1,4 +1,4 @@
-class Equipment
+class Spell
   attr_accessor :name
 
   @@all = []
