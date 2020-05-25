@@ -10,6 +10,8 @@ require_relative "../lib/equipment.rb"
 CLI.new.start
 
 #Calling classes:
-#Condition.new("blah").get_all("http://www.dnd5eapi.co/api/conditions/")
+#condition = Condition.new
+#condition.urls("http://www.dnd5eapi.co/api/conditions/")
+#condition.create_all("http://www.dnd5eapi.co/api/conditions/")
 #Spell.new.get_all("http://www.dnd5eapi.co/api/spells/")
 #Equipment.new("blah").get_all("http://www.dnd5eapi.co/api/equipment/")

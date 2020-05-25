@@ -1,1 +1,1 @@
-#get_all can be refactored into a module here
+# Class#get_all can be refactored into a module here
