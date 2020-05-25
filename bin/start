@@ -11,5 +11,5 @@ CLI.new.start
 
 #Calling classes:
 #Condition.new("blah").get_all("http://www.dnd5eapi.co/api/conditions/")
-#Spell.new("blah").get_all("http://www.dnd5eapi.co/api/spells/")
+#Spell.new.get_all("http://www.dnd5eapi.co/api/spells/")
 #Equipment.new("blah").get_all("http://www.dnd5eapi.co/api/equipment/")

@@ -8,8 +8,8 @@ class Condition
   end
 
   def self.get_all(url)
-    conditions = API.new(url).parse_json
     condition_names = []
+    conditions = API.new(url).parse_json
     conditions_array = conditions["results"]
     conditions_array.each do |hash| 
       hash.collect do |key, value|
