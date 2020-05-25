@@ -9,7 +9,6 @@ class Condition
   end
 
   def self.get_all(url)
-    conditions = API.new(url).parse_json
-    puts conditions
+    API.new(url).parse_json
   end
 end
