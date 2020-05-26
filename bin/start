@@ -6,11 +6,12 @@ require_relative "../lib/api.rb"
 require_relative "../lib/condition.rb"
 require_relative "../lib/spell.rb"
 require_relative "../lib/equipment.rb"
+require_relative "../lib/character.rb"
 
 puts
 puts "𝕕𝕦𝕟𝕘𝕖𝕠𝕟𝕤 𝕒𝕟𝕕 𝕕𝕣𝕒𝕘𝕠𝕟𝕤 𝕔𝕠𝕞𝕡𝕒𝕟𝕚𝕠𝕟"
 puts
-CLI.new.start
+#CLI.new.start
 
 #Calling classes:
 #condition = Condition.new
@@ -24,3 +25,7 @@ CLI.new.start
 #equipment = Equipment.new
 #equipment.urls("http://www.dnd5eapi.co/api/equipment/")
 #equipment.create_all("http://www.dnd5eapi.co/api/equipment/")
+
+char = Character.new
+char.random_character("Breunor", "https://www.dnd5eapi.co/api/races/", "https://www.dnd5eapi.co/api/classes/")
+#char.urls("https://www.dnd5eapi.co/api/races/", "https://www.dnd5eapi.co/api/classes/")
