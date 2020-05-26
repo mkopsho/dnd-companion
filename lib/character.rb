@@ -1,13 +1,27 @@
 class Character
   BASE_URL = "http://www.dnd5eapi.co"
   
-  attr_accessor :name, :level, :race, :klass, :ability_scores, :skills, :proficiencies, :ac
+  attr_accessor :name, :level, :race, :klass, :size, :speed, :proficiencies
 
   @@all = []
 
-  def initialize(name = nil, level = 1)
+  def initialize(name = nil, level = 1, race = nil, klass = nil, size = nil, speed = nil, proficiencies = nil)
     @name = name
     @level = level
+    @race = race
+    @klass = klass
+    @size = size
+    @speed = speed
+    @proficiencies = proficiencies
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.clear
+    @@all.clear
   end
 
   def race_urls(race_url)
@@ -39,16 +53,23 @@ class Character
     klass_object = API.new(klass_url).parse_json
 
     race_attrs = race_object.select do |k, v|
-      k == "name" || k == "speed" || k == "ability_bonuses" || k == "size" || k == "starting_proficiencies" || k == "languages" || k == "traits"
+      k == "name" || k == "speed" || k == "size"
     end
-    race_attrs["race_name"] = race_attrs.delete "name" #Updating the :name key to prevent duplicates on merge with `klass_attrs`
+    race_attrs["race_name"] = race_attrs.delete "name" #Updating the :name key to prevent duplicate keys on merge with `klass_attrs`
 
     klass_attrs = klass_object.select do |k, v|
-      k == "name" || k == "hit_die" || k == "proficiencies" || k == "saving_throws" || k == "starting_equipment"
+      k == "name" || k == "proficiencies"
     end
-    klass_attrs["class_name"] = klass_attrs.delete "name" #Same here!
+    klass_attrs["class_name"] = klass_attrs.delete "name" #Same here as above!
 
-    hash = race_attrs.merge(klass_attrs)
-    binding.pry
+    generator = klass_attrs.merge(race_attrs)
+    race = generator["race_name"]
+    klass = generator["class_name"]
+    size = generator["size"]
+    speed = generator["speed"]
+    proficiencies = generator["proficiencies"]
+
+    Character.new(name, level, race, klass, size, speed, proficiencies)
+    
   end
 end
