@@ -1,13 +1,6 @@
 #!/usr/bin/env ruby
 
-#This is bad, refactor
-require_relative "../environment.rb"
-require_relative "../lib/cli.rb"
-require_relative "../lib/api.rb"
-require_relative "../lib/condition.rb"
-require_relative "../lib/spell.rb"
-require_relative "../lib/equipment.rb"
-require_relative "../lib/character.rb"
+require_relative "../lib/dnd-companion.rb"
 
 puts
 puts "𝕕𝕦𝕟𝕘𝕖𝕠𝕟𝕤 𝕒𝕟𝕕 𝕕𝕣𝕒𝕘𝕠𝕟𝕤 𝕔𝕠𝕞𝕡𝕒𝕟𝕚𝕠𝕟"
@@ -15,6 +8,9 @@ puts
 CLI.new.start
 
 #Calling classes:
+#api = API.new("http://www.dnd5eapi.co/api/conditions/")
+#api.get_urls
+
 #condition = Condition.new
 #condition.urls("http://www.dnd5eapi.co/api/conditions/")
 #condition.create_all("http://www.dnd5eapi.co/api/conditions/")

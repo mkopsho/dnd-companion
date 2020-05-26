@@ -44,13 +44,20 @@ class Equipment
       equipment_category = tableau["equipment_category"]
       category_range = tableau["category_range"] 
       cost = tableau["cost"]["quantity"].to_s + tableau["cost"]["unit"]
-      damage = tableau["damage"]
-      #["damage_dice"] + " " + tableau["damage"]["damage_type"]["name"]
-      range = tableau["range"]
-      #["normal"] + " / " + tableau["range"]["long"]
+      if tableau["damage"] != nil
+        damage = tableau["damage"]["damage_dice"] + " " + tableau["damage"]["damage_type"]["name"]
+      end
+      if tableau["range"] != nil
+        range = tableau["range"]["normal"].to_s 
+        if tableau["range"]["long"] != nil
+          range = tableau["range"]["normal"].to_s + "/" + tableau["range"]["long"].to_s
+        end
+      end
       weight = tableau["weight"]
-      props = tableau["properties"]
-      #[0]["name"] + " / " + tableau["properties"][1]["name"]
+      if tableau["properties"] != nil
+        props = []
+        tableau["properties"].each { |prop| props << prop["name"] }
+      end
       Equipment.new(name, equipment_category, category_range, cost, damage, range, weight, props)
     end
   end

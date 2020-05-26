@@ -1,1 +1,0 @@
-#A bunch of class methods should be refactored into a module here

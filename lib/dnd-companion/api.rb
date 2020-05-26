@@ -20,8 +20,3 @@ class API
     JSON.parse(self.get_response_body)
   end
 end
-
-#conditions = API.new("http://www.dnd5eapi.co/api/conditions/")
-#spells = API.new("http://www.dnd5eapi.co/api/spells/")
-#equipment = API.new("http://www.dnd5eapi.co/api/equipment/")
-#binding.pry
