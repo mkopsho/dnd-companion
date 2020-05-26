@@ -10,7 +10,7 @@ class CLI
     puts
     puts "What would you like to learn about?".colorize(:light_green)
     puts
-    puts "1. 𝕤𝕡𝕖𝕝𝕝𝕤 | 2. 𝕖𝕢𝕦𝕚𝕡𝕞𝕖𝕟𝕥 | 3. 𝕔𝕠𝕟𝕕𝕚𝕥𝕚𝕠𝕟𝕤 | 4. 𝕔𝕙𝕒𝕣𝕒𝕔𝕥𝕖𝕣 𝕘𝕖𝕟𝕖𝕣𝕒𝕥𝕠𝕣 | 5. 𝕖𝕩𝕚𝕥".colorize(:blue)
+    puts "1. ⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. ？𝙲𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛 𝙶𝚎𝚗𝚎𝚛𝚊𝚝𝚘𝚛 ？| 5. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input 
     when "1"
@@ -24,7 +24,7 @@ class CLI
     when "5"
       puts "Farewell, traveler!".colorize(:light_green)
     else
-      puts "Had a bunch of grog, I see! Please try again: "
+      puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
       self.menu
     end
   end

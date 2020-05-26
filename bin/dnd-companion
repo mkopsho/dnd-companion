@@ -3,26 +3,10 @@
 require_relative "../lib/dnd-companion.rb"
 
 puts
-puts "𝕕𝕦𝕟𝕘𝕖𝕠𝕟𝕤 𝕒𝕟𝕕 𝕕𝕣𝕒𝕘𝕠𝕟𝕤 𝕔𝕠𝕞𝕡𝕒𝕟𝕚𝕠𝕟"
+puts '
+8888b.  88b 88 8888b.      dP""b8  dP"Yb  8b    d8 88""Yb    db    88b 88 88  dP"Yb  88b 88 
+8I  Yb 88Yb88  8I  Yb     dP   `" dP   Yb 88b  d88 88__dP   dPYb   88Yb88 88 dP   Yb 88Yb88 
+8I  dY 88 Y88  8I  dY     Yb      Yb   dP 88YbdP88 88"""   dP__Yb  88 Y88 88 Yb   dP 88 Y88 
+8888Y"  88  Y8 8888Y"      YboodP  YbodP  88 YY 88 88     dP""""Yb 88  Y8 88  YbodP  88  Y8 '
 puts
 CLI.new.start
-
-#Calling classes:
-#api = API.new("http://www.dnd5eapi.co/api/conditions/")
-#api.get_urls
-
-#condition = Condition.new
-#condition.urls("http://www.dnd5eapi.co/api/conditions/")
-#condition.create_all("http://www.dnd5eapi.co/api/conditions/")
-
-#spell = Spell.new
-#spell.urls("http://www.dnd5eapi.co/api/spells/")
-#spell.create_all("http://www.dnd5eapi.co/api/spells/")
-
-#equipment = Equipment.new
-#equipment.urls("http://www.dnd5eapi.co/api/equipment/")
-#equipment.create_all("http://www.dnd5eapi.co/api/equipment/")
-
-#char = Character.new
-#char.random_character("Breunor", "https://www.dnd5eapi.co/api/races/", "https://www.dnd5eapi.co/api/classes/")
-#char.urls("https://www.dnd5eapi.co/api/races/", "https://www.dnd5eapi.co/api/classes/")
