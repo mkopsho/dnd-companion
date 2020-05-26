@@ -67,9 +67,12 @@ class Character
     klass = generator["class_name"]
     size = generator["size"]
     speed = generator["speed"]
-    proficiencies = generator["proficiencies"]
-
+    proficiency = generator["proficiencies"]
+    proficiencies = []
+    proficiency.select do |prof|
+      proficiencies << prof["name"]
+    end
+    #binding.pry
     Character.new(name, level, race, klass, size, speed, proficiencies)
-    
   end
 end

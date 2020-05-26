@@ -129,13 +129,31 @@ class CLI
       end
     end
     #validator?
-    #puts "I don't know about that condition. Want to have another go?".colorize(:light_blue)
     puts
     end_menu
   end
 
   def character_menu
-    puts "Character gen!"
+    puts "A fine choice, traveler. Simply give a name for your new character:".colorize(:light_green)
+    puts
+    user_input = gets.chomp.strip.capitalize
+    puts
+    puts "Ah, #{user_input}? This is a noble name, a strong name.".colorize(:light_green)
+    puts
+    character = Character.new
+    character.random_character(user_input, "https://www.dnd5eapi.co/api/races/", "https://www.dnd5eapi.co/api/classes/")
+    puts "Here is your character's tableau:".colorize(:light_green)
+    Character.all.each do |character|
+      if user_input == character.name
+        puts "
+        Name: #{character.name}
+        Race: #{character.race}
+        Class: #{character.class}
+        Size: #{character.size}
+        Speed: #{character.speed}
+        Proficiencies: #{character.proficiencies}".colorize(:light_green)
+      end
+    end
   end
 
   def end_menu
