@@ -72,7 +72,6 @@ class Character
     proficiency.select do |prof|
       proficiencies << prof["name"]
     end
-    #binding.pry
     Character.new(name, level, race, klass, size, speed, proficiencies)
   end
 end

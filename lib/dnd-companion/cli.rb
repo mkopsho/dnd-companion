@@ -14,47 +14,47 @@ class CLI
     user_input = gets.chomp.strip
     case user_input 
     when "1"
-      self.spells_menu
+      generate_spells
+      spells_menu
     when "2"
-      self.equipment_menu
+      generate_equipment
+      equipment_menu
     when "3"
-      self.conditions_menu
+      generate_conditions
+      conditions_menu
     when "4"
-      self.character_menu
+      character_menu
     when "5"
       puts "Farewell, traveler!".colorize(:light_green)
     else
       puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
-      self.menu
+      menu
     end
   end
-
-  def spells_menu
+  
+  def generate_spells
     spells = Spell.get_all("http://www.dnd5eapi.co/api/spells/")
+    puts
     puts "A fine choice, traveler. I know some arcana about some #{spells.length} spells because I got double degrees in magic school.".colorize(:light_green)
     puts
     puts "Please wait while I rack my brain...".colorize(:light_green) #Building objects takes forever!
     Spell.create_all("http://www.dnd5eapi.co/api/spells/") unless Spell.all.length > 0
-    puts "Would you rather I:".colorize(:light_green)
+  end
+  
+  def spells_menu
     puts
-    puts "1. List them all? | 2. Provide information by spell name?".colorize(:blue)
+    puts "⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡".colorize(:blue)
+    puts "Select your preference:".colorize(:light_green)
+    puts
+    puts "1. The full list of spells | 2. Information by spell name | 3. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
     if user_input == "1"
       puts
       puts "Ah, another fine choice. Here are all the spells I know about:"
       Spell.all.each do |spell|
-        puts "- #{spell.name}".colorize(:blue)
+        puts "- #{spell.name}"
       end
-      puts
-      puts "Would you like to continue browsing spells?".colorize(:light_green)
-      puts
-      puts "1. Yes | 2. No".colorize(:blue)
-      user_input = gets.chomp.strip
-      if user_input == "1"
-        spells_menu
-      else
-        end_menu
-      end
+      spells_menu
     elsif user_input == "2"
       puts
       puts "Pragmatic! Please provide the name of the spell and I will tell you all I know:".colorize(:light_green)
@@ -65,7 +65,6 @@ class CLI
         if user_input == spell.name
           puts
           puts "Ah, #{spell.name} is one of my favorite spells! A fine choice, traveler.\nHere's everything I know about the #{spell.name} spell:\n".colorize(:light_green)
-          # Make this nicer to look at. Like a page out of the PHB...
           puts "\tMaterial: #{spell.materials}\n
         Components: #{spell.components}\n
         Casting Time: #{spell.casting_time}\n
@@ -73,37 +72,32 @@ class CLI
         Description: #{spell.description}"
         end
       end
-      puts
-      puts "Would you like to continue browsing spells?".colorize(:light_green)
-      puts
-      puts "1. Yes | 2. No".colorize(:blue)
-      user_input = gets.chomp.strip
-      if user_input == "1"
-        spells_menu
-      else
-        end_menu
-      end
-    else
-      puts
-      end_menu
+      spells_menu
+    elsif user_input == "3"
+      menu
     end
   end
   
-  def equipment_menu
+  def generate_equipment
     equipment = Equipment.get_all("http://www.dnd5eapi.co/api/equipment/")
     puts "A fine choice, traveler. I know about #{equipment.length} equipable items.".colorize(:light_green)
     puts
     puts "Please wait while I rack my brain...".colorize(:light_green) #Building objects takes forever!
     Equipment.create_all("http://www.dnd5eapi.co/api/equipment/") unless Equipment.all.length > 0
-    puts "Would you rather:".colorize(:light_green)
+  end
+
+  def equipment_menu
     puts
-    puts "1. View the list? | 2. Search by name?".colorize(:blue)
+    puts "⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️".colorize(:blue)
+    puts "Select your preference:".colorize(:light_green)
+    puts
+    puts "1. View the full list | 2. Search by name | 3. Search by category | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
     if user_input == "1"
       Equipment.all.each do |item|
         puts "- #{item.name}".colorize(:blue)
       end
-      puts end_menu
+      equipment_menu
     elsif user_input == "2"
       puts "Pragmatic! Please provide the name of the item and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.split(" ")
@@ -111,8 +105,8 @@ class CLI
       user_input = user_input.join(" ")
       Equipment.all.each do |item|
         if user_input == item.name
+          puts
           puts "Ah, the #{item.name} is one of my favorite items! A fine choice, traveler.\nHere's everything I know about the #{item.name}:\n".colorize(:light_green)
-          # Make this nicer to look at. Like a page out of the PHB...
           puts "\tCategory: #{item.equipment_category}
         Category Range: #{item.category_range}
         Cost: #{item.cost}
@@ -122,46 +116,57 @@ class CLI
         Properties: #{item.props}"
         end
       end
-      puts
-      puts "Would you like to continue browsing items?".colorize(:light_green)
-      puts
-      puts "1. Yes | 2. No".colorize(:blue)
-      user_input = gets.chomp.strip
-      if user_input == "1"
-        equipment_menu
-      else
-        end_menu
+      equipment_menu
+    elsif user_input == "3"
+      puts "Alright, traveler. Please enter a category from this list:".colorize(:light_green)
+      equipment_categories = []
+      Equipment.all.each do |item|
+        equipment_categories << item.equipment_category
       end
-    else
+      equipment_categories.uniq.each { |category| puts "- #{category}"}
+      user_input = gets.chomp.strip.split(" ")
+      user_input = user_input.collect { |word| word.capitalize }
+      user_input = user_input.join(" ")
       puts
-      end_menu
+      puts "Another fine choice! Here are all of the items from the #{user_input} category:".colorize(:light_green)
+      Equipment.all.select do |item|
+        if item.equipment_category == user_input
+          puts "- #{item.name}"
+        end
+      end
+      equipment_menu
+    elsif user_input == "4"
+      menu
     end
+  end
+  
+  def generate_conditions
+    Condition.create_all("http://www.dnd5eapi.co/api/conditions/") unless Condition.all.length > 0
   end
 
   def conditions_menu
-    puts "Which condition would you like more information on?".colorize(:light_green)
     puts
-    Condition.create_all("http://www.dnd5eapi.co/api/conditions/") unless Condition.all.length > 0
-    Condition.all.each do |condition|
-      puts "- #{condition.name}".colorize(:blue)
-    end
+    puts "☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠".colorize(:blue)
+    puts "1. View the full list | 2. Search by name | 3. Back to main menu".colorize(:light_green)
     puts
-    user_input = gets.chomp.strip.capitalize
-    Condition.all.each do |condition|
-      if user_input == condition.name
-        puts "Ah, #{condition.name} is one of my favorite conditions! A fine choice, traveler.\nHere's everything I know about #{condition.name}:\n".colorize(:light_green)
-        puts "\t" + condition.description.join("\n\t")
-      end
-    end
-    puts
-    puts "Would you like to see another condition?".colorize(:light_green)
-    puts
-    puts "1. Yes | 2. No".colorize(:blue)
     user_input = gets.chomp.strip
     if user_input == "1"
+      Condition.all.each do |condition|
+        puts "- #{condition.name}"
+      end
       conditions_menu
-    else
-      end_menu
+    elsif user_input == "2"
+      puts "Pragmatic! Please provide the name of the item and I will tell you all I know:".colorize(:light_green)
+      user_input = gets.chomp.strip.capitalize
+      Condition.all.each do |condition|
+        if user_input == condition.name
+          puts "Ah, #{condition.name} is one of my favorite conditions! A fine choice, traveler.\nHere's everything I know about #{condition.name}:\n".colorize(:light_green)
+          puts "\t" + condition.description.join("\n\t")
+        end
+      end
+      conditions_menu
+    elsif user_input == "3"
+      menu
     end
   end
 
@@ -188,16 +193,7 @@ class CLI
         Proficiencies: #{character.proficiencies}"
       end
     end
-    puts
-    puts "Would you like to generate another character?".colorize(:light_green)
-    puts
-    puts "1. Yes | 2. No".colorize(:blue)
-    user_input = gets.chomp.strip
-    if user_input == "1"
-      character_menu
-    else
-      end_menu
-    end
+    end_menu
   end
 
   def end_menu
