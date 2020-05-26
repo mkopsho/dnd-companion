@@ -20,3 +20,7 @@ CLI.new.start
 #spell = Spell.new
 #spell.urls("http://www.dnd5eapi.co/api/spells/")
 #spell.create_all("http://www.dnd5eapi.co/api/spells/")
+
+#equipment = Equipment.new
+#equipment.urls("http://www.dnd5eapi.co/api/equipment/")
+#equipment.create_all("http://www.dnd5eapi.co/api/equipment/")
