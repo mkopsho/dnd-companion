@@ -1,9 +1,9 @@
 class Spell
-  attr_accessor :name, :description, :higher_level, :range, :components, :materials, :casting_time, :duration, :ritual, :concentration, :level, :klass
+  attr_accessor :name, :description, :higher_level, :range, :components, :materials, :casting_time, :duration, :ritual, :concentration, :level, :klasses, :school
 
   @@all = []
 
-  def initialize(name = nil, description = nil, higher_level = nil, range = nil, components = nil, materials = nil, casting_time = nil, duration = nil, ritual = nil, concentration = nil, level = nil, klass = nil)
+  def initialize(name = nil, description = nil, higher_level = nil, range = nil, components = nil, materials = nil, casting_time = nil, duration = nil, ritual = nil, concentration = nil, level = nil, klasses = nil, school = nil)
     @name = name
     @description = description
     @higher_level = higher_level
@@ -15,7 +15,8 @@ class Spell
     @ritual = ritual
     @concentration = concentration
     @level = level
-    @klass = @klass
+    @klasses = klasses
+    @school = school
     @@all << self
   end
 
@@ -45,7 +46,7 @@ class Spell
     end
     spells_tableau.each do |tableau|
       name = tableau["name"]
-      description = tableau["desc"]
+      description = tableau["desc"].join
       higher_level = tableau["higher_level"]
       range = tableau["range"]
       components = tableau["components"]
@@ -54,9 +55,11 @@ class Spell
       duration = tableau["duration"]
       ritual = tableau["ritual"]
       concentration = tableau["concentration"]
-      level = tableau["level"]
-      klass = tableau["class"]
-      Spell.new(name, description, higher_level, range, components, materials, casting_time, duration, ritual, concentration, level, klass)
+      level = tableau["level"].to_s
+      school = tableau["school"]["name"]
+      klasses = []
+      tableau["classes"].each { |klass| klasses << klass["name"] }
+      Spell.new(name, description, higher_level, range, components, materials, casting_time, duration, ritual, concentration, level, klasses, school)
     end
   end
 

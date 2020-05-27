@@ -46,11 +46,11 @@ class CLI
     puts "⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡".colorize(:blue)
     puts "Select your preference:".colorize(:light_green)
     puts
-    puts "1. The full list of spells | 2. Information by spell name | 3. Back to main menu".colorize(:blue)
+    puts "1. The full list of spells | 2. Information by spell name | 3. List by class and level | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
     if user_input == "1"
       puts
-      puts "Ah, another fine choice. Here are all the spells I know about:"
+      puts "Ah, another fine choice. Here are all the spells I know about:".colorize(:light_green)
       Spell.all.each do |spell|
         puts "- #{spell.name}"
       end
@@ -65,15 +65,33 @@ class CLI
         if user_input == spell.name
           puts
           puts "Ah, #{spell.name} is one of my favorite spells! A fine choice, traveler.\nHere's everything I know about the #{spell.name} spell:\n".colorize(:light_green)
-          puts "\tMaterial: #{spell.materials}\n
-        Components: #{spell.components}\n
+          puts "\tLevel: #{spell.level}\n
+        Material: #{spell.materials}\n
+        Components: #{spell.components.join(", ")}\n
         Casting Time: #{spell.casting_time}\n
         Duration: #{spell.duration}\n
+        Classes: #{spell.klasses.join(", ")}\n
+        School: #{spell.school}\n
         Description: #{spell.description}"
         end
       end
       spells_menu
     elsif user_input == "3"
+      puts
+      puts "Wonderful! Give me the name of the class:".colorize(:light_green)
+      user_input_klass = gets.chomp.strip.capitalize
+      puts
+      puts "Great. Now give me the name of the desired level (0 for cantrips):".colorize(:light_green)
+      user_input_level = gets.chomp.strip
+      puts
+      puts "Fantastic. Here are all the spells I've found for the #{user_input_klass} class at level #{user_input_level}:".colorize(:light_green)
+      Spell.all.each do |spell|
+        if spell.klasses.include?(user_input_klass) && spell.level == user_input_level
+          puts "- #{spell.name} (#{spell.level})"
+        end
+      end
+      spells_menu
+    elsif user_input == "4"
       menu
     end
   end
