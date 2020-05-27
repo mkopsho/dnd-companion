@@ -29,7 +29,7 @@ class CLI
     when "6"
       puts "Farewell, traveler!".colorize(:light_green)
     else
-      puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
+      puts "Had a bunch of grog, I see! Please try again:".colorize(:light_green)
       menu
     end
   end
@@ -50,14 +50,15 @@ class CLI
     puts
     puts "1. The full list of spells | 2. Information by spell name | 3. List by class and level | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
-    if user_input == "1"
+    case user_input
+    when "1"
       puts
       puts "Ah, another fine choice. Here are all the spells I know about:".colorize(:light_green)
       Spell.all.each do |spell|
         puts "- #{spell.name}"
       end
       spells_menu
-    elsif user_input == "2"
+    when "2"
       puts
       puts "Pragmatic! Please provide the name of the spell and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.split(" ")
@@ -78,7 +79,7 @@ class CLI
         end
       end
       spells_menu
-    elsif user_input == "3"
+    when "3"
       puts
       puts "Wonderful! Give me the name of the class:".colorize(:light_green)
       user_input_klass = gets.chomp.strip.capitalize
@@ -93,8 +94,11 @@ class CLI
         end
       end
       spells_menu
-    elsif user_input == "4"
+    when "4"
       menu
+    else
+      puts "Had a bunch of grog, I see! Please try again:".colorize(:light_green)
+      spells_menu
     end
   end
   
@@ -113,12 +117,13 @@ class CLI
     puts
     puts "1. View the full list | 2. Search by name | 3. Search by category | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
-    if user_input == "1"
+    case user_input
+    when "1"
       Equipment.all.each do |item|
         puts "- #{item.name}"
       end
       equipment_menu
-    elsif user_input == "2"
+    when "2"
       puts
       puts "Pragmatic! Please provide the name of the item and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.split(" ")
@@ -138,7 +143,7 @@ class CLI
         end
       end
       equipment_menu
-    elsif user_input == "3"
+    when "3"
       puts "Alright, traveler. Please enter a category from this list:".colorize(:light_green)
       equipment_categories = []
       Equipment.all.each do |item|
@@ -156,8 +161,11 @@ class CLI
         end
       end
       equipment_menu
-    elsif user_input == "4"
+    when "4"
       menu
+    else
+      puts "Had a bunch of grog, I see! Please try again:".colorize(:light_green)
+      equipment_menu
     end
   end
   
@@ -171,12 +179,13 @@ class CLI
     puts "1. View the full list | 2. Search by name | 3. Back to main menu".colorize(:light_green)
     puts
     user_input = gets.chomp.strip
-    if user_input == "1"
+    case user_input
+    when "1"
       Condition.all.each do |condition|
         puts "- #{condition.name}"
       end
       conditions_menu
-    elsif user_input == "2"
+    when "2"
       puts
       puts "Pragmatic! Please provide the name of the item and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.capitalize
@@ -187,8 +196,11 @@ class CLI
         end
       end
       conditions_menu
-    elsif user_input == "3"
+    when "3"
       menu
+    else
+      puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
+      conditions_menu
     end
   end
 
@@ -204,14 +216,15 @@ class CLI
   def monster_menu
     puts
     puts "𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜".colorize(:blue)
-    puts "1. View the full list | 2. Search by name | 3. Randomly generate by CR | 4. Back to main menu".colorize(:light_green)
+    puts "1. View the full list | 2. Search by name | 3. Randomly generate by CR | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
-    if user_input == "1"
+    case user_input
+    when "1"
       Monster.all.each do |monster|
         puts "- #{monster.name}"
       end
       monster_menu
-    elsif user_input == "2"
+    when "2"
       puts
       puts "Pragmatic! Please provide the name of the monster and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.split(" ")
@@ -231,7 +244,7 @@ class CLI
         end
       end
       monster_menu
-    elsif user_input == "3"
+    when "3"
       puts
       puts "A fine choice, traveler. Give me your desired CR rating (0.00 - 30):"
       user_input = gets.chomp.strip
@@ -241,8 +254,11 @@ class CLI
         end
       end
       monster_menu
-    elsif user_input == "4"
+    when "4"
       menu
+    else
+      puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
+      monster_menu
     end
   end
 
@@ -280,7 +296,7 @@ class CLI
     user_input = gets.chomp.strip
     case user_input
     when "1"
-      self.menu
+      menu
     else
       puts "Farewell, traveler!".colorize(:light_green)
     end

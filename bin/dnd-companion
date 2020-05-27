@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/dnd-companion.rb"
+require_relative "../lib/environment.rb"
 
 puts
 puts '

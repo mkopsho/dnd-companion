@@ -3,7 +3,7 @@ class Monster
 
   @@all = []
 
-  def initialize(name = nil, size = nil, ac = nil, hp = nil, hd = nil, speed = nil, cr = nil, actions = nil, legendary_actions = nil, special_abilities = special_abilities)
+  def initialize(name = nil, size = nil, ac = nil, hp = nil, hd = nil, speed = nil, cr = nil, actions = nil, legendary_actions = nil, special_abilities = nil)
     @name = name
     @size = size
     @ac = ac
