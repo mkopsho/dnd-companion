@@ -10,7 +10,7 @@ class CLI
     puts
     puts "What would you like to learn about?".colorize(:light_green)
     puts
-    puts "1. ⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. ？𝙲𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛 𝙶𝚎𝚗𝚎𝚛𝚊𝚝𝚘𝚛 ？| 5. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
+    puts "1. ⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. 𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜 | 5. ？𝙲𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛 𝙶𝚎𝚗𝚎𝚛𝚊𝚝𝚘𝚛 ？| 6. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input 
     when "1"
@@ -23,8 +23,11 @@ class CLI
       generate_conditions
       conditions_menu
     when "4"
-      character_menu
+      generate_monsters
+      monster_menu
     when "5"
+      character_menu
+    when "6"
       puts "Farewell, traveler!".colorize(:light_green)
     else
       puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
@@ -113,10 +116,11 @@ class CLI
     user_input = gets.chomp.strip
     if user_input == "1"
       Equipment.all.each do |item|
-        puts "- #{item.name}".colorize(:blue)
+        puts "- #{item.name}"
       end
       equipment_menu
     elsif user_input == "2"
+      puts
       puts "Pragmatic! Please provide the name of the item and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.split(" ")
       user_input = user_input.collect { |word| word.capitalize }
@@ -146,7 +150,7 @@ class CLI
       user_input = user_input.collect { |word| word.capitalize }
       user_input = user_input.join(" ")
       puts
-      puts "Another fine choice! Here are all of the items from the #{user_input} category:".colorize(:light_green)
+      puts "Another fine choice! Here are all of the items from the #{user_input} category:\n".colorize(:light_green)
       Equipment.all.select do |item|
         if item.equipment_category == user_input
           puts "- #{item.name}"
@@ -174,6 +178,7 @@ class CLI
       end
       conditions_menu
     elsif user_input == "2"
+      puts
       puts "Pragmatic! Please provide the name of the item and I will tell you all I know:".colorize(:light_green)
       user_input = gets.chomp.strip.capitalize
       Condition.all.each do |condition|
@@ -184,6 +189,60 @@ class CLI
       end
       conditions_menu
     elsif user_input == "3"
+      menu
+    end
+  end
+
+  def generate_monsters
+    monsters = Monster.get_all("http://www.dnd5eapi.co/api/monsters/")
+    puts
+    puts "A fine choice, traveler. I know about some #{monsters.length} monsters.".colorize(:light_green)
+    puts
+    puts "Please wait while I rack my brain...".colorize(:light_green) #Building objects takes forever!
+    Monster.create_all("http://www.dnd5eapi.co/api/monsters/") unless Monster.all.length > 0
+  end
+
+  def monster_menu
+    puts
+    puts "𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜".colorize(:blue)
+    puts "1. View the full list | 2. Search by name | 3. Randomly generate by CR | 4. Back to main menu".colorize(:light_green)
+    user_input = gets.chomp.strip
+    if user_input == "1"
+      Monster.all.each do |monster|
+        puts "- #{monster.name}"
+      end
+      monster_menu
+    elsif user_input == "2"
+      puts
+      puts "Pragmatic! Please provide the name of the monster and I will tell you all I know:".colorize(:light_green)
+      user_input = gets.chomp.strip.split(" ")
+      user_input = user_input.collect { |word| word.capitalize }
+      user_input = user_input.join(" ")
+      Monster.all.each do |monster|
+        if user_input == monster.name
+          puts
+          puts "Here's everything I know about the #{user_input} monster:\n".colorize(:light_green)
+          puts "\tName: #{monster.name}
+        Size: #{monster.size}:
+        Speed: #{monster.speed}:
+        Armor Class: #{monster.ac}:
+        Hit Points: #{monster.hp}:
+        Challenge Rating: #{monster.cr}:
+        Actions: #{monster.actions}"
+        end
+      end
+      monster_menu
+    elsif user_input == "3"
+      puts
+      puts "A fine choice, traveler. Give me your desired CR rating (0.00 - 30):"
+      user_input = gets.chomp.strip
+      Monster.all.collect do |monster|
+        if monster.cr == user_input
+          puts "- #{monster.name} (CR #{monster.cr})"
+        end
+      end
+      monster_menu
+    elsif user_input == "4"
       menu
     end
   end
