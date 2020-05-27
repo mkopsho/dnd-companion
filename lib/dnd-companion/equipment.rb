@@ -1,9 +1,9 @@
 class Equipment
-  attr_accessor :name, :equipment_category, :category_range, :cost, :damage, :range, :weight, :props
+  attr_accessor :name, :equipment_category, :category_range, :cost, :damage, :range, :weight, :props, :armor_class, :armor_category
 
   @@all = []
 
-  def initialize(name = nil, equipment_category = nil, category_range = nil, cost = nil, damage = nil, range = nil, weight = nil, props = nil)
+  def initialize(name = nil, equipment_category = nil, category_range = nil, cost = nil, damage = nil, range = nil, weight = nil, props = nil, armor_class = nil, armor_category = nil)
     @name = name
     @equipment_category = equipment_category
     @category_range = category_range
@@ -12,6 +12,8 @@ class Equipment
     @range = range
     @weight = weight
     @props = props
+    @armor_class = armor_class
+    @armor_category = armor_category
     @@all << self
   end
 
@@ -44,6 +46,7 @@ class Equipment
       equipment_category = tableau["equipment_category"]
       category_range = tableau["category_range"] 
       cost = tableau["cost"]["quantity"].to_s + tableau["cost"]["unit"]
+      weight = tableau["weight"]
       if tableau["damage"] != nil
         damage = tableau["damage"]["damage_dice"] + " " + tableau["damage"]["damage_type"]["name"]
       end
@@ -53,12 +56,17 @@ class Equipment
           range = tableau["range"]["normal"].to_s + "/" + tableau["range"]["long"].to_s
         end
       end
-      weight = tableau["weight"]
       if tableau["properties"] != nil
         props = []
         tableau["properties"].each { |prop| props << prop["name"] }
       end
-      Equipment.new(name, equipment_category, category_range, cost, damage, range, weight, props)
+      if tableau["armor_class"] != nil
+        armor_class = tableau["armor_class"]["base"].to_s
+      end
+      if tableau["armor_category"] != nil
+        armor_category = tableau["armor_category"]
+      end
+      Equipment.new(name, equipment_category, category_range, cost, damage, range, weight, props, armor_class, armor_category)
     end
   end
 

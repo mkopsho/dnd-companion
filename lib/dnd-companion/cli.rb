@@ -1,8 +1,19 @@
-require "colorize"
-
 class CLI
   def start
+    self.title_card
     self.menu
+  end
+
+  def title_card
+    puts
+    puts '
+8888b.  88b 88 8888b.      dP""b8  dP"Yb  8b    d8 88""Yb   db    88b 88 88  dP"Yb  88b 88 
+ 8I  Yb 88Yb88  8I  Yb    dP   `" dP   Yb 88b  d88 88__dP  dPYb   88Yb88 88 dP   Yb 88Yb88 
+ 8I  dY 88 Y88  8I  dY    Yb      Yb   dP 88YbdP88 88"""  dP__Yb  88 Y88 88 Yb   dP 88 Y88 
+8888Y"  88  Y8 8888Y"      YboodP  YbodP  88 YY 88 88    dP""""Yb 88  Y8 88  YbodP  88  Y8 '
+    puts
+    puts "(...for novice DMs who haven't memorized anything and hate disrupting the flow of play to look things up)"
+    puts
   end
 
   def menu
@@ -134,11 +145,13 @@ class CLI
           puts
           puts "Ah, the #{item.name} is one of my favorite items! A fine choice, traveler.\nHere's everything I know about the #{item.name}:\n".colorize(:light_green)
           puts "\tCategory: #{item.equipment_category}
+        Armor Category: #{item.armor_category}
+        Armor Class: #{item.armor_class}
         Category Range: #{item.category_range}
-        Cost: #{item.cost}
         Damage: #{item.damage}
-        Weight: #{item.weight}
         Range: #{item.range}
+        Weight: #{item.weight}
+        Cost: #{item.cost}
         Properties: #{item.props}"
         end
       end

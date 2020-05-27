@@ -3,6 +3,7 @@ require "net/http"
 require "open-uri"
 require "json"
 require "pry"
+require "colorize"
 
 require_relative "../lib/dnd-companion/cli.rb"
 require_relative "../lib/dnd-companion/api.rb"
