@@ -9,4 +9,6 @@ puts '
  8I  dY 88 Y88  8I  dY    Yb      Yb   dP 88YbdP88 88"""  dP__Yb  88 Y88 88 Yb   dP 88 Y88 
 8888Y"  88  Y8 8888Y"      YboodP  YbodP  88 YY 88 88    dP""""Yb 88  Y8 88  YbodP  88  Y8 '
 puts
+puts "(...for novice DMs who haven't memorized anything and hate disrupting the flow of play to look things up)"
+puts
 CLI.new.start

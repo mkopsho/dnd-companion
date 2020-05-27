@@ -2,7 +2,6 @@ require "colorize"
 
 class CLI
   def start
-    puts "Hey there, weary traveler.".colorize(:light_green)
     self.menu
   end
 
