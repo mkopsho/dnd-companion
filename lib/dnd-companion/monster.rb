@@ -1,9 +1,9 @@
 class Monster
-  attr_accessor :name, :size, :ac, :hp, :hd, :speed, :cr, :actions, :legendary_actions, :special_abilities
+  attr_accessor :name, :size, :ac, :hp, :hd, :speed, :cr, :actions, :reactions, :legendary_actions, :special_abilities
 
   @@all = []
 
-  def initialize(name = nil, size = nil, ac = nil, hp = nil, hd = nil, speed = nil, cr = nil, actions = nil, legendary_actions = nil, special_abilities = nil)
+  def initialize(name = nil, size = nil, ac = nil, hp = nil, hd = nil, speed = nil, cr = nil, actions = nil, reactions = nil, legendary_actions = nil, special_abilities = nil)
     @name = name
     @size = size
     @ac = ac
@@ -12,6 +12,7 @@ class Monster
     @speed = speed
     @cr = cr
     @actions = actions
+    @reactions = reactions
     @legendary_actions = legendary_actions
     @special_abilities = special_abilities
     @@all << self
@@ -49,10 +50,32 @@ class Monster
       hd = monster["hit_dice"]
       speed = monster["speed"]
       cr = monster["challenge_rating"].to_s
-      actions = monster["actions"]
-      legendary_actions = monster["legendary_actions"] 
-      special_abilities = monster["special_abilities"]
-      Monster.new(name, size, ac, hp, hd, speed, cr, actions, legendary_actions, special_abilities)
+      legendary_actions = monster["legendary_actions"]
+      if monster["actions"] != nil
+        actions = []
+        monster["actions"].each do |action|
+          actions << action["name"] + ": " + action["desc"]
+        end
+      end
+      if monster["reactions"] != nil
+        reactions = []
+        monster["reactions"].each do |reaction|
+          reactions << reaction["name"] + ": " + reaction["desc"]
+        end
+      end
+      if monster["special_abilities"] != nil
+        special_abilities = []
+        monster["special_abilities"].each do |special|
+          special_abilities << special["name"] + ": " + special["desc"]
+        end
+      end
+      if monster["legendary_actions"] != nil
+        legendary_actions = []
+        monster["legendary_actions"].each do |legendary|
+          legendary_actions << legendary["name"] + ": " + legendary["desc"]
+        end
+      end
+      Monster.new(name, size, ac, hp, hd, speed, cr, actions, reactions, legendary_actions, special_abilities)
     end
   end
 

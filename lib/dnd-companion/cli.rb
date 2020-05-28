@@ -189,8 +189,9 @@ class CLI
   def conditions_menu
     puts
     puts "☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠".colorize(:blue)
-    puts "1. View the full list | 2. Search by name | 3. Back to main menu".colorize(:light_green)
+    puts "Select your preference:"
     puts
+    puts "1. View the full list | 2. Search by name | 3. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input
     when "1"
@@ -204,6 +205,7 @@ class CLI
       user_input = gets.chomp.strip.capitalize
       Condition.all.each do |condition|
         if user_input == condition.name
+          puts
           puts "Ah, #{condition.name} is one of my favorite conditions! A fine choice, traveler.\nHere's everything I know about #{condition.name}:\n".colorize(:light_green)
           puts "\t" + condition.description.join("\n\t")
         end
@@ -248,12 +250,15 @@ class CLI
           puts
           puts "Here's everything I know about the #{user_input} monster:\n".colorize(:light_green)
           puts "\tName: #{monster.name}
-        Size: #{monster.size}:
-        Speed: #{monster.speed}:
-        Armor Class: #{monster.ac}:
-        Hit Points: #{monster.hp}:
-        Challenge Rating: #{monster.cr}:
-        Actions: #{monster.actions}"
+        Size: #{monster.size}
+        Speed: #{monster.speed}
+        Armor Class: #{monster.ac}
+        Hit Points: #{monster.hp}
+        Challenge Rating: #{monster.cr}\n
+        Actions: #{monster.actions}\n
+        Special Abilities: #{monster.special_abilities}\n
+        Reactions: #{monster.reactions}\n
+        Legendary Abilities: #{monster.legendary_actions}"
         end
       end
       monster_menu
