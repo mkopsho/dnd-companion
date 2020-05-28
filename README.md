@@ -8,7 +8,6 @@ Navigate to the `dnd-companion` directory and run:
 ```
 bundle install
 ```
-This will install a small number of gems.
 
 To start the companion app, run:
 ```
