@@ -264,7 +264,7 @@ class CLI
       monster_menu
     when "3"
       puts
-      puts "A fine choice, traveler. Give me your desired CR rating (0.00 - 30):"
+      puts "A fine choice, traveler. Give me your desired CR rating (0.00 - 30):".colorize(:light_green)
       user_input = gets.chomp.strip
       Monster.all.collect do |monster|
         if monster.cr == user_input
