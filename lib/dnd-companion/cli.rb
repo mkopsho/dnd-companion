@@ -126,7 +126,7 @@ class CLI
     puts "⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️".colorize(:blue)
     puts "Select your preference:".colorize(:light_green)
     puts
-    puts "1. View the full list | 2. Search by name | 3. Search by category | 4. Back to main menu".colorize(:blue)
+    puts "1. View the full list | 2. Information by item name | 3. Search by category | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input
     when "1"
@@ -157,7 +157,7 @@ class CLI
       end
       equipment_menu
     when "3"
-      puts "Alright, traveler. Please enter a category from this list:".colorize(:light_green)
+      puts "Alright, traveler. Please enter a category from this list:\n".colorize(:light_green)
       equipment_categories = []
       Equipment.all.each do |item|
         equipment_categories << item.equipment_category
@@ -189,7 +189,7 @@ class CLI
   def conditions_menu
     puts
     puts "☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠".colorize(:blue)
-    puts "Select your preference:"
+    puts "Select your preference:".colorize(:light_green)
     puts
     puts "1. View the full list | 2. Search by name | 3. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
@@ -231,7 +231,7 @@ class CLI
   def monster_menu
     puts
     puts "𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜".colorize(:blue)
-    puts "1. View the full list | 2. Search by name | 3. Randomly generate by CR | 4. Back to main menu".colorize(:blue)
+    puts "1. View the full list | 2. Information by monster name | 3. Search by CR | 4. Back to main menu".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input
     when "1"
@@ -264,7 +264,7 @@ class CLI
       monster_menu
     when "3"
       puts
-      puts "A fine choice, traveler. Give me your desired CR rating (0.00 - 30):".colorize(:light_green)
+      puts "A fine choice, traveler. Give me your desired CR rating (0.00 - 30):\n".colorize(:light_green)
       user_input = gets.chomp.strip
       Monster.all.collect do |monster|
         if monster.cr == user_input
