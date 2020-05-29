@@ -29,7 +29,7 @@ class Equipment
 
   def self.create_all(url)
     equipment = urls(url)
-    equipment_tableau = equipment.map do |equipment| { API.new(equipment).parse_json }
+    equipment_tableau = equipment.map { |equipment| API.new(equipment).parse_json }
     equipment_tableau.each do |tableau|
       name = tableau["name"]
       equipment_category = tableau["equipment_category"]

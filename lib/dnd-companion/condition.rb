@@ -21,7 +21,7 @@ class Condition
 
   def self.create_all(url)
     conditions = urls(url)
-    conditions_tableau = conditions.map do |condition| { API.new(condition).parse_json }
+    conditions_tableau = conditions.map { |condition| API.new(condition).parse_json }
     conditions_tableau.each do |tableau|
       name = tableau["name"]
       description = tableau["desc"]

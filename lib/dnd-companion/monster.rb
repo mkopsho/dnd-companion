@@ -30,7 +30,7 @@ class Monster
 
   def self.create_all(url)
     monster = urls(url)
-    monster_tableau = monster.map do |monster| { API.new(monster).parse_json }
+    monster_tableau = monster.map { |monster| API.new(monster).parse_json }
     monster_tableau.each do |monster|
       name = monster["name"]
       size = monster["size"]
