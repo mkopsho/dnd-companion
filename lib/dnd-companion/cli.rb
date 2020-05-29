@@ -24,16 +24,16 @@ class CLI
     user_input = gets.chomp.strip
     case user_input 
     when "1"
-      generate_spells
+      generate(Spell)
       spells_menu
     when "2"
-      generate_equipment
+      generate(Equipment)
       equipment_menu
     when "3"
-      generate_conditions
+      generate(Condition)
       conditions_menu
     when "4"
-      generate_monsters
+      generate(Monster)
       monster_menu
     when "5"
       character_menu
@@ -45,13 +45,23 @@ class CLI
     end
   end
   
-  def generate_spells
-    spells = Spell.get_all("http://www.dnd5eapi.co/api/spells/")
-    puts
-    puts "A fine choice, traveler. I know some arcana about some #{spells.length} spells because I got double degrees in magic school.".colorize(:light_green)
+  def generate(klass)
+    class_string = klass.to_s.downcase
+    case class_string
+    when "spell"
+      url = "spells/"
+    when "equipment"
+      url = "equipment/"
+    when "condition"
+      url = "conditions/"
+    when "monster"
+      url = "monsters/"
+    end
+    objects = klass.get_all("http://www.dnd5eapi.co/api/" + url)
+    puts "A fine choice, traveler. I know stuff about #{objects.length} #{class_string}".colorize(:light_green) + "s ".colorize(:light_green) + "because I got double degrees in Dungeon Master school.".colorize(:light_green)
     puts
     puts "Please wait while I rack my brain...".colorize(:light_green) #Building objects takes forever!
-    Spell.create_all("http://www.dnd5eapi.co/api/spells/") unless Spell.all.length > 0
+    klass.create_all("http://www.dnd5eapi.co/api/" + url) unless klass.all.length > 0
   end
   
   def spells_menu
@@ -111,14 +121,6 @@ class CLI
       puts "Had a bunch of grog, I see! Please try again:".colorize(:light_green)
       spells_menu
     end
-  end
-  
-  def generate_equipment
-    equipment = Equipment.get_all("http://www.dnd5eapi.co/api/equipment/")
-    puts "A fine choice, traveler. I know about #{equipment.length} equipable items.".colorize(:light_green)
-    puts
-    puts "Please wait while I rack my brain...".colorize(:light_green) #Building objects takes forever!
-    Equipment.create_all("http://www.dnd5eapi.co/api/equipment/") unless Equipment.all.length > 0
   end
 
   def equipment_menu
@@ -181,10 +183,6 @@ class CLI
       equipment_menu
     end
   end
-  
-  def generate_conditions
-    Condition.create_all("http://www.dnd5eapi.co/api/conditions/") unless Condition.all.length > 0
-  end
 
   def conditions_menu
     puts
@@ -219,15 +217,6 @@ class CLI
     end
   end
 
-  def generate_monsters
-    monsters = Monster.get_all("http://www.dnd5eapi.co/api/monsters/")
-    puts
-    puts "A fine choice, traveler. I know about some #{monsters.length} monsters.".colorize(:light_green)
-    puts
-    puts "Please wait while I rack my brain...".colorize(:light_green) #Building objects takes forever!
-    Monster.create_all("http://www.dnd5eapi.co/api/monsters/") unless Monster.all.length > 0
-  end
-
   def monster_menu
     puts
     puts "𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜".colorize(:blue)
@@ -258,7 +247,7 @@ class CLI
         Actions: #{monster.actions}\n
         Special Abilities: #{monster.special_abilities}\n
         Reactions: #{monster.reactions}\n
-        Legendary Abilities: #{monster.legendary_actions}"
+        Legendary Actions: #{monster.legendary_actions}"
         end
       end
       monster_menu

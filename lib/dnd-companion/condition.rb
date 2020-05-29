@@ -1,4 +1,6 @@
 class Condition
+  extend Memorable::ClassMethods
+  
   attr_accessor :name, :description
   
   @@all = []
@@ -17,21 +19,10 @@ class Condition
     @@all.clear
   end
 
-  def self.urls(url)
-    conditions_urls = []
-    conditions = API.new(url).parse_json
-    conditions_array = conditions["results"]
-    conditions_array.each do |hash|
-      conditions_urls << url + hash["index"].downcase
-    end
-    conditions_urls
-  end
-
   def self.create_all(url)
-    conditions_tableau = []
     conditions = urls(url)
-    conditions.each do |condition|
-      conditions_tableau << API.new(condition).parse_json
+    conditions_tableau = conditions.map do |condition|
+      API.new(condition).parse_json
     end
     conditions_tableau.each do |tableau|
       name = tableau["name"]

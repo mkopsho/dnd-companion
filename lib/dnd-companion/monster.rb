@@ -1,4 +1,6 @@
 class Monster
+  extend Memorable::ClassMethods
+
   attr_accessor :name, :size, :ac, :hp, :hd, :speed, :cr, :actions, :reactions, :legendary_actions, :special_abilities
 
   @@all = []
@@ -26,21 +28,10 @@ class Monster
     @@all.clear
   end
 
-  def self.urls(url)
-    monster_urls = []
-    monster = API.new(url).parse_json
-    monster_array = monster["results"]
-    monster_array.each do |hash|
-      monster_urls << url + hash["index"].downcase
-    end
-    monster_urls
-  end
-
   def self.create_all(url)
-    monster_tableau = []
     monster = urls(url)
-    monster.each do |monster|
-      monster_tableau << API.new(monster).parse_json
+    monster_tableau = monster.map do |monster|
+      API.new(monster).parse_json
     end
     monster_tableau.each do |monster|
       name = monster["name"]
@@ -52,44 +43,26 @@ class Monster
       cr = monster["challenge_rating"].to_s
       legendary_actions = monster["legendary_actions"]
       if monster["actions"] != nil
-        actions = []
-        monster["actions"].each do |action|
-          actions << action["name"] + ": " + action["desc"]
+        actions = monster["actions"].map do |action|
+          action["name"] + ": " + action["desc"]
         end
       end
       if monster["reactions"] != nil
-        reactions = []
-        monster["reactions"].each do |reaction|
-          reactions << reaction["name"] + ": " + reaction["desc"]
+        reactions = monster["reactions"].map do |reaction|
+          reaction["name"] + ": " + reaction["desc"]
         end
       end
       if monster["special_abilities"] != nil
-        special_abilities = []
-        monster["special_abilities"].each do |special|
-          special_abilities << special["name"] + ": " + special["desc"]
+        special_abilities = monster["special_abilities"].map do |special|
+          special["name"] + ": " + special["desc"]
         end
       end
       if monster["legendary_actions"] != nil
-        legendary_actions = []
-        monster["legendary_actions"].each do |legendary|
-          legendary_actions << legendary["name"] + ": " + legendary["desc"]
+        legendary_actions = monster["legendary_actions"].map do |legendary|
+          legendary["name"] + ": " + legendary["desc"]
         end
       end
       Monster.new(name, size, ac, hp, hd, speed, cr, actions, reactions, legendary_actions, special_abilities)
     end
-  end
-
-  def self.get_all(url)
-    monster_names = []
-    monster = API.new(url).parse_json
-    monster_array = monster["results"]
-    monster_array.each do |hash| 
-      hash.collect do |key, value|
-        if key == "name"
-          monster_names << value
-        end
-      end
-    end
-    monster_names
   end
 end

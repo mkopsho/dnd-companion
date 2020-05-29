@@ -1,4 +1,6 @@
 class Spell
+  extend Memorable::ClassMethods
+
   attr_accessor :name, :description, :higher_level, :range, :components, :materials, :casting_time, :duration, :ritual, :concentration, :level, :klasses, :school
 
   @@all = []
@@ -28,16 +30,6 @@ class Spell
     @@all.clear
   end
 
-  def self.urls(url)
-    spells_urls = []
-    spells = API.new(url).parse_json
-    spells_array = spells["results"]
-    spells_array.each do |hash|
-      spells_urls << url + hash["index"].downcase
-    end
-    spells_urls
-  end
-
   def self.create_all(url)
     spells_tableau = []
     spells = urls(url)
@@ -57,23 +49,8 @@ class Spell
       concentration = tableau["concentration"]
       level = tableau["level"].to_s
       school = tableau["school"]["name"]
-      klasses = []
-      tableau["classes"].each { |klass| klasses << klass["name"] }
+      klasses = tableau["classes"].map { |klass| klass["name"] }
       Spell.new(name, description, higher_level, range, components, materials, casting_time, duration, ritual, concentration, level, klasses, school)
     end
-  end
-
-  def self.get_all(url)
-    spell_names = []
-    spells = API.new(url).parse_json
-    spells_array = spells["results"]
-    spells_array.each do |hash| 
-      hash.collect do |key, value|
-        if key == "name"
-          spell_names << value
-        end
-      end
-    end
-    spell_names
   end
 end
