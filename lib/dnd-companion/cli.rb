@@ -158,9 +158,8 @@ class CLI
       equipment_menu
     when "3"
       puts "Alright, traveler. Please enter a category from this list:\n".colorize(:light_green)
-      equipment_categories = []
-      Equipment.all.each do |item|
-        equipment_categories << item.equipment_category
+      equipment_categories = Equipment.all.each do |item|
+        item.equipment_category
       end
       equipment_categories.uniq.each { |category| puts "- #{category}"}
       user_input = gets.chomp.strip.split(" ")

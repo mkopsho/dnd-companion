@@ -31,10 +31,9 @@ class Spell
   end
 
   def self.create_all(url)
-    spells_tableau = []
     spells = urls(url)
-    spells.each do |spell|
-      spells_tableau << API.new(spell).parse_json
+    spells_tableau = spells.each do |spell|
+      API.new(spell).parse_json
     end
     spells_tableau.each do |tableau|
       name = tableau["name"]
