@@ -20,7 +20,7 @@ class CLI
     puts
     puts "What would you like to learn about?".colorize(:light_green)
     puts
-    puts "1. ⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. 𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜 | 5. ？𝙲𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛 𝙶𝚎𝚗𝚎𝚛𝚊𝚝𝚘𝚛 ？| 6. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
+    puts "1. ⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. 𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜 | 5. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input 
     when "1"
@@ -36,8 +36,6 @@ class CLI
       generate(Monster)
       monster_menu
     when "5"
-      character_menu
-    when "6"
       puts "Farewell, traveler!".colorize(:light_green)
     else
       puts "Had a bunch of grog, I see! Please try again:".colorize(:light_green)
@@ -268,32 +266,6 @@ class CLI
       puts "Had a bunch of grog, I see! Please try again: ".colorize(:light_green)
       monster_menu
     end
-  end
-
-  def character_menu
-    puts "A fine choice, traveler. Simply give a name for your new character:".colorize(:light_green)
-    puts
-    user_input = gets.chomp.strip.split(" ")
-    user_input = user_input.collect { |word| word.capitalize }
-    user_input = user_input.join(" ")
-    puts
-    puts "Ah, #{user_input}? This is a noble name, a strong name.".colorize(:light_green)
-    puts
-    character = Character.new
-    character.random_character(user_input, "https://www.dnd5eapi.co/api/races/", "https://www.dnd5eapi.co/api/classes/")
-    puts "Here are your random character's stats:".colorize(:light_green)
-    puts
-    Character.all.each do |character|
-      if user_input == character.name
-        puts "\tName: #{character.name}
-        Race: #{character.race}
-        Class: #{character.klass}
-        Size: #{character.size}
-        Speed: #{character.speed}
-        Proficiencies: #{character.proficiencies}"
-      end
-    end
-    end_menu
   end
 
   def end_menu
