@@ -1,5 +1,5 @@
 class Monster
-  extend Memorable::ClassMethods
+  extend Omniscience::ClassMethods
 
   attr_accessor :name, :size, :ac, :hp, :hd, :speed, :cr, :actions, :reactions, :legendary_actions, :special_abilities
 
@@ -30,9 +30,7 @@ class Monster
 
   def self.create_all(url)
     monster = urls(url)
-    monster_tableau = monster.map do |monster|
-      API.new(monster).parse_json
-    end
+    monster_tableau = monster.map do |monster| { API.new(monster).parse_json }
     monster_tableau.each do |monster|
       name = monster["name"]
       size = monster["size"]

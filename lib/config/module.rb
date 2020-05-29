@@ -1,4 +1,4 @@
-module Memorable
+module Omniscience
   module ClassMethods
     def urls(url)
       uri_object = API.new(url).parse_json

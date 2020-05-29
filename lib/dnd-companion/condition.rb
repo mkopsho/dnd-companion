@@ -1,11 +1,11 @@
 class Condition
-  extend Memorable::ClassMethods
+  extend Omniscience::ClassMethods
 
   attr_accessor :name, :description
   
   @@all = []
 
-  def initialize(name = nil, description = nil) #spell_hash
+  def initialize(name = nil, description = nil)
     @name = name
     @description = description
     @@all << self
@@ -21,9 +21,7 @@ class Condition
 
   def self.create_all(url)
     conditions = urls(url)
-    conditions_tableau = conditions.map do |condition|
-      API.new(condition).parse_json
-    end
+    conditions_tableau = conditions.map do |condition| { API.new(condition).parse_json }
     conditions_tableau.each do |tableau|
       name = tableau["name"]
       description = tableau["desc"]

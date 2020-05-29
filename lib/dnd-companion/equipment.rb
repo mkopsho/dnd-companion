@@ -1,5 +1,5 @@
 class Equipment
-  extend Memorable::ClassMethods
+  extend Omniscience::ClassMethods
 
   attr_accessor :name, :equipment_category, :category_range, :cost, :damage, :range, :weight, :props, :armor_class, :armor_category
 
@@ -29,9 +29,7 @@ class Equipment
 
   def self.create_all(url)
     equipment = urls(url)
-    equipment_tableau = equipment.map do |equipment|
-      API.new(equipment).parse_json
-    end
+    equipment_tableau = equipment.map do |equipment| { API.new(equipment).parse_json }
     equipment_tableau.each do |tableau|
       name = tableau["name"]
       equipment_category = tableau["equipment_category"]
