@@ -1,11 +1,11 @@
 class Condition
   extend Memorable::ClassMethods
-  
+
   attr_accessor :name, :description
   
   @@all = []
 
-  def initialize(name = nil, description = nil)
+  def initialize(name = nil, description = nil) #spell_hash
     @name = name
     @description = description
     @@all << self

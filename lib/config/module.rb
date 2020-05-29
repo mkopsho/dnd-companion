@@ -18,8 +18,4 @@ module Memorable
       names
     end
   end
-
-  module InstanceMethods
-
-  end
 end

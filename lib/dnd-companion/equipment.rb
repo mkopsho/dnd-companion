@@ -48,7 +48,7 @@ class Equipment
         end
       end
       if tableau["properties"] != nil
-        props = tableau["properties"].each { |prop| prop["name"] }
+        props = tableau["properties"].map { |prop| prop["name"] }
       end
       if tableau["armor_class"] != nil
         armor_class = tableau["armor_class"]["base"].to_s

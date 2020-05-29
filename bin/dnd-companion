@@ -3,3 +3,5 @@
 require_relative "../lib/environment.rb"
 
 CLI.new.start
+
+#Spell.create_all("http://www.dnd5eapi.co/api/spells/")
