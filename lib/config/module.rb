@@ -1,5 +1,9 @@
 module Omniscience
   module ClassMethods
+    def clear
+      self.all.clear
+    end
+
     def urls(url)
       uri_object = API.new(url).parse_json
       object_array = uri_object["results"]

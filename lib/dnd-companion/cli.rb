@@ -1,7 +1,7 @@
 class CLI
   def start
-    self.title_card
-    self.menu
+    title_card
+    menu
   end
 
   def title_card
@@ -20,7 +20,7 @@ class CLI
     puts
     puts "What would you like to learn about?".colorize(:light_green)
     puts
-    puts "1. ⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. 𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜 | 5. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
+    puts "1. ⚡ 𝚂𝚙𝚎𝚕𝚕𝚜 ⚡| 2. ⚔️ 𝙴𝚚𝚞𝚒𝚙𝚖𝚎𝚗𝚝 ⚔️ | 3. ☠ 𝙲𝚘𝚗𝚍𝚒𝚝𝚒𝚘𝚗𝚜 ☠ | 4. 𝙼𝚘𝚗𝚜𝚝𝚎𝚛𝚜 | 5. ↗ 𝙴𝚡𝚒𝚝 ↗".colorize(:blue)
     user_input = gets.chomp.strip
     case user_input 
     when "1"
@@ -64,7 +64,7 @@ class CLI
   
   def spells_menu
     puts
-    puts "⚡𝚂𝚙𝚎𝚕𝚕𝚜 ⚡".colorize(:blue)
+    puts "⚡ 𝚂𝚙𝚎𝚕𝚕𝚜 ⚡".colorize(:blue)
     puts "Select your preference:".colorize(:light_green)
     puts
     puts "1. The full list of spells | 2. Information by spell name | 3. List by class and level | 4. Back to main menu".colorize(:blue)
@@ -91,6 +91,7 @@ class CLI
         Material: #{spell.materials}\n
         Components: #{spell.components.join(", ")}\n
         Casting Time: #{spell.casting_time}\n
+        Range: #{spell.range}\n
         Duration: #{spell.duration}\n
         Classes: #{spell.klasses.join(", ")}\n
         School: #{spell.school}\n
@@ -149,10 +150,10 @@ class CLI
         Armor Class: #{item.armor_class}
         Category Range: #{item.category_range}
         Damage: #{item.damage}
-        Range: #{item.range}
-        Weight: #{item.weight}
+        Range: #{item.range}ft
+        Weight: #{item.weight}lbs
         Cost: #{item.cost}
-        Properties: #{item.props}"
+        Properties: #{item.props.join(", ")}"
         end
       end
       equipment_menu
