@@ -36,9 +36,7 @@ class Equipment
       if tableau["armor_category"] != nil
         armor_category_value = tableau["armor_category"]
       end
-      Equipment.new(name: tableau["name"], equipment_category: tableau["equipment_category"], category_range: tableau["category_range"],
-      cost: tableau["cost"]["quantity"].to_s + tableau["cost"]["unit"], damage: damage_value, range: range_value,
-      weight: tableau["weight"], props: props_value, armor_class: armor_class_value, armor_category: armor_category_value)
+      Equipment.new(name: tableau["name"], equipment_category: tableau["equipment_category"], category_range: tableau["category_range"], cost: tableau["cost"]["quantity"].to_s + tableau["cost"]["unit"], damage: damage_value, range: range_value, weight: tableau["weight"], props: props_value, armor_class: armor_class_value, armor_category: armor_category_value)
     end
   end
 end

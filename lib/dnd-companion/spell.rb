@@ -18,10 +18,7 @@ class Spell
     spells = urls(url)
     spells_tableau = spells.map { |spell| API.new(spell).parse_json }
     spells_tableau.each do |tableau|
-      Spell.new(name: tableau["name"], description: tableau["desc"].join, range: tableau["range"],
-      components: tableau["components"], materials: tableau["material"], casting_time: tableau["casting_time"],
-      duration: tableau["duration"], level: tableau["level"], school: tableau["school"]["name"],
-      klasses: tableau["classes"].map { |klass| klass["name"] })
+      Spell.new(name: tableau["name"], description: tableau["desc"].join, range: tableau["range"], components: tableau["components"], materials: tableau["material"], casting_time: tableau["casting_time"], duration: tableau["duration"], level: tableau["level"], school: tableau["school"]["name"], klasses: tableau["classes"].map { |klass| klass["name"] })
     end
   end
 end
