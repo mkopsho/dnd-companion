@@ -38,7 +38,7 @@ class Monster
           legendary["name"] + ": " + legendary["desc"]
         end
       end
-      Monster.new(name: tableau["name"], size: tableau["size"], ac: tableau["armor_class"].to_s, hp: tableau["hit_points"].to_s, speed: tableau["speed"], cr: tableau["challenge_rating"], actions: actions_value, reactions: reactions_value, legendary_actions: legendary_actions_value, special_abilities: special_abilities_value)
+      Monster.new(name: tableau["name"], size: tableau["size"], ac: tableau["armor_class"].to_s, hp: tableau["hit_points"].to_s, speed: tableau["speed"], cr: tableau["challenge_rating"].to_s, actions: actions_value, reactions: reactions_value, legendary_actions: legendary_actions_value, special_abilities: special_abilities_value)
     end
   end
 end

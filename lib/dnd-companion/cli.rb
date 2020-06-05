@@ -153,7 +153,7 @@ class CLI
         Range: #{item.range}ft
         Weight: #{item.weight}lbs
         Cost: #{item.cost}
-        Properties: #{item.props.join(", ")}"
+        Properties: #{item.props}"
         end
       end
       equipment_menu

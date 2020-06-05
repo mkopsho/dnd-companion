@@ -5,13 +5,9 @@ class API
     @url = url
   end
 
-  def get_response_body
+  def parse_json
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
-    response.body
-  end
-
-  def parse_json
-    JSON.parse(self.get_response_body)
+    JSON.parse(response.body)
   end
 end
