@@ -17,6 +17,9 @@ And you're good to go, traveler!
 
 * * *
 
-Demo: https://www.youtube.com/watch?v=KdRx_dLqikA
+# Demo and Blog
+
+Demo:
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/KdRx_dLqikA/0.jpg)](http://www.youtube.com/watch?v=KdRx_dLqikA)
 
 Blog: https://mkopsho.github.io/blog/cli-and-rpg-old-school.html
