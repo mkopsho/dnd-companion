@@ -21,4 +21,4 @@ And you're good to go, traveler!
 
 Demo: https://www.youtube.com/watch?v=KdRx_dLqikA
 
-Blog: https://mkopsho.github.io/blog/cli-and-rpg-old-school.html
+Blog: https://kopsho.cafe/blog/cli-and-rpg-old-school.html
